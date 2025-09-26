@@ -13,7 +13,7 @@ jobs:
       - name: Fetch Balance
         id: fetch
         run: |
-          response=$(curl -s "https://prepaid.desco.org.bd/api/unified/customer/getBalance?accountNo=&meterNo=030410055423")
+          response=$(curl --insecure -s "https://prepaid.desco.org.bd/api/unified/customer/getBalance?accountNo=&meterNo=030410055423")
           balance=$(echo "$response" | jq -r '.data.balance')
           echo "balance=$balance" >> $GITHUB_ENV
 
