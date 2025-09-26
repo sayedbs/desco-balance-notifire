@@ -43,7 +43,7 @@ jobs:
           Balance Details:
           Current Balance: ${{ env.balance }}
           
-          visit for more infor: <a href='https://prepaid.desco.org.bd/customer/#/customer-info'>View Account Online</a><br>
+          visit: https://prepaid.desco.org.bd/customer/#/customer-info
           Checked automatically at 11PM (BD time)
           
           Credit: sayed021 "
