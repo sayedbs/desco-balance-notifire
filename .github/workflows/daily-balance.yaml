@@ -37,7 +37,14 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="⚡️ DESCO Balance Notification\nBalance: ${{ env.balance }}\n⏰ Checked automatically at 11PM (BD time)."
+          MESSAGE="⚡️ DESCO Balance Notification
+          Balance: ${{ env.balance }}
+          ⏰ Checked automatically at 11PM (BD time)."
+          
+          # Escape newlines for Telegram
+          MESSAGE_ESCAPED=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/%0A/g')
+          
+          # Send the message
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
           -d chat_id="${TELEGRAM_CHAT_ID}" \
           -d text="$MESSAGE" \
