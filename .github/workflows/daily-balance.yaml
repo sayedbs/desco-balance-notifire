@@ -42,11 +42,11 @@ jobs:
           <u>Balance Details:</u><br>
           <b>Current Balance:</b> ${{ env.balance }}<br>
           <b>Meter number:</b> 030410055423 <br>
-          visit for more infor: <a href='https://prepaid.desco.org.bd/'>View Account Online</a><br>
+          visit for more infor: <a href='https://prepaid.desco.org.bd/customer/#/customer-info'>View Account Online</a><br>
           <b>credit:</b> sayed021 "
           
-          # Escape newlines for Telegram
-          MESSAGE_ESCAPED=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/%0A/g')
+          # Escape newlines for Telegram | this will be used when directly using newlines in a message
+          # MESSAGE_ESCAPED=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/%0A/g')
           
           # Send the message
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
