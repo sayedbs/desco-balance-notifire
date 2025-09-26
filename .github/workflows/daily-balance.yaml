@@ -37,10 +37,13 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MESSAGE="⚡️ DESCO Balance Notification
-          Balance: ${{ env.balance }}
-          ⏰ Checked automatically at 11PM (BD time).
-          credit: sayed021"
+          MESSAGE="<b>⚡ DESCO Balance Notification</b><br>
+          <i>Checked automatically at 11PM (BD time)</i><br><br>
+          <u>Balance Details:</u><br>
+          <b>Current Balance:</b> ${{ env.balance }}<br>
+          <b>Meter number:</b> 030410055423 <br>
+          visit for more infor: <a href='https://prepaid.desco.org.bd/'>View Account Online</a><br>
+          <b>credit:</b> sayed021 "
           
           # Escape newlines for Telegram
           MESSAGE_ESCAPED=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/%0A/g')
