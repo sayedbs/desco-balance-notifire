@@ -1,0 +1,33 @@
+name: Daily Balance Notification
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # Runs at 11 PM Bangladesh time (UTC+6 → 17:00 UTC)
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch Balance
+        id: fetch
+        run: |
+          response=$(curl -s "https://prepaid.desco.org.bd/api/unified/customer/getBalance?accountNo=&meterNo=030410055423")
+          balance=$(echo "$response" | jq -r '.data.balance')
+          echo "balance=$balance" >> $GITHUB_ENV
+
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "DESCO Balance Notification"
+          to: abusayed.bs23@gmail.com
+          from: GitHub Actions <${{ secrets.EMAIL_USER }}>
+          body: |
+            Hello,  
+            Your DESCO prepaid meter balance is: **${{ env.balance }}**
+            (Checked automatically at 11PM).
