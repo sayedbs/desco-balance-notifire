@@ -39,7 +39,8 @@ jobs:
         run: |
           MESSAGE="⚡️ DESCO Balance Notification
           Balance: ${{ env.balance }}
-          ⏰ Checked automatically at 11PM (BD time)."
+          ⏰ Checked automatically at 11PM (BD time).
+          credit: sayed021"
           
           # Escape newlines for Telegram
           MESSAGE_ESCAPED=$(echo "$MESSAGE" | sed ':a;N;$!ba;s/\n/%0A/g')
