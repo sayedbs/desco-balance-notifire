@@ -22,21 +22,6 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
-          subject: "DESCO Balance Notification"
-          to: abusayed.bs23@gmail.com
-          from: GitHub Actions <${{ secrets.EMAIL_USER }}>
-          body: |
-            Hello,
-            Your DESCO prepaid meter balance is: **${{ env.balance }}**
-            (Checked automatically at 11PM).
-
-      - name: Send Email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
           username: ${{ secrets.EMAIL_USER }} 
           password: ${{ secrets.EMAIL_PASS }} 
           subject: "DESCO Balance Notification"
