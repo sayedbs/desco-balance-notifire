@@ -31,3 +31,17 @@ jobs:
             Hello,
             Your DESCO prepaid meter balance is: **${{ env.balance }}**
             (Checked automatically at 11PM).
+
+      - name: Send Telegram Notification
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MESSAGE="⚡️ DESCO Balance Notification%0A\
+Balance: ${balance}%0A\
+⏰ Checked automatically at 11PM (BD time)."
+
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            -d text="${MESSAGE}" \
+            -d parse_mode=Markdown
